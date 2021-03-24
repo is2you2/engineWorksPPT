@@ -17,6 +17,9 @@ func _ready():
 	check_pages()
 	if max_scene_count > 0:
 		move_to_scene(0)
+	else:
+		printerr('페이지 구성 없음')
+		get_tree().quit()
 	yield(get_tree().create_timer(0),"timeout")
 	for current in current_scene.get_children():
 		current.set_process_input(true)
@@ -28,9 +31,9 @@ func check_pages():
 		dir.list_dir_begin(true)
 		var file_name:=dir.get_next()
 		while file_name:
-			file_name=dir.get_next()
 			if file_name.find('.tscn') + 1:
 				max_scene_count += 1
+			file_name=dir.get_next()
 		dir.list_dir_end()
 	else:
 		printerr('pages 열람 실패')
