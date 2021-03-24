@@ -67,7 +67,7 @@ func next_scene():
 		printerr('다음 씬 없음: (%d+1)/%d'%[current_scene_id,max_scene_count-1])
 
 func move_to_scene(page_id:int):
-	print('이 장면으로 이동:', page_id)
+	print_debug('이 장면으로 이동:', page_id)
 	for current in current_scene.get_children():
 		current_scene.remove_child(current)
 		current.queue_free()

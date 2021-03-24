@@ -9,7 +9,7 @@ export var max_animation_stack:int
 func _init():
 	hide() # 보통 캐시로 로드되기 때문에 시작부터 숨김
 
-func _ready():
+func _ready(): # 활성시 인풋도 열릴 예정
 	set_process_input(false)
 
 func _input(event):
@@ -26,6 +26,7 @@ func previous_animation_stack():
 		Root.previous_scene()
 	else:
 		current_animation_id = precaled
+		previous_animation_stack_action()
 		print_debug('이전 애니메이션 스택으로: ',current_animation_id)
 
 func next_animation_stack():
@@ -34,4 +35,17 @@ func next_animation_stack():
 		Root.next_scene()
 	else:
 		current_animation_id = precaled
+		next_animation_stack_action()
 		print_debug('다음 애니메이션 스택으로: ',current_animation_id)
+
+# Override belows
+# 사용자가 함수로 구분해줘야함
+func previous_animation_stack_action():
+	match(current_animation_id):
+		_:
+			printerr('previous_animation_stack_action 함수가 구성되지 않음 (Scene: %s / anim: %d)'%[name,current_animation_id])
+
+func next_animation_stack_action():
+	match(current_animation_id):
+		_:
+			printerr('next_animation_stack_action 함수가 구성되지 않음 (Scene: %s / anim: %d)'%[name,current_animation_id])
