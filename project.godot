@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "Control",
 "class": "PageScene",
 "language": "GDScript",
-"path": "res://forms/pages.gd"
+"path": "res://pages.gd"
 } ]
 _global_script_class_icons={
 "PageScene": ""

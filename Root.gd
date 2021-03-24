@@ -7,6 +7,8 @@ var max_scene_count:=0
 var current_scene_id:=0
 # 현재 네비게이터 상태
 var is_navigator_open:=false
+# 다음에 보여질 씬
+var cached_next_scene:PageScene
 
 onready var current_scene:=$'/root/Main/CurrentScene'
 onready var cache_scene:=$'/root/Main/CacheNextScene'
@@ -70,26 +72,26 @@ func move_to_scene(page_id:int):
 	print_debug('이 장면으로 이동:', page_id)
 	for current in current_scene.get_children():
 		current_scene.remove_child(current)
-		current.queue_free()
+		current._user_command_exit()
 	current_scene_id = page_id
 	for cached in cache_scene.get_children():
 		if cached.name == '%03d'%page_id:
 			# 준비된 씬으로 변경처리
-			cache_scene.remove_child(cached)
-			current_scene.add_child(cached)
-			cached.show()
-			cached.set_process_input(true)
+			cached_next_scene=cached
 		else: # 나머지 삭제
 			cache_scene.remove_child(cached)
-			cached.queue_free()
+			cached.force_remove=true
+			cached._user_command_exit()
 	# 캐시된 씬 중에 페이지가 없던 경우
 	if current_scene.get_child_count() < 1:
+		cached_next_scene=null
 		load_target_scene([page_id],true)
 	# 보통 다음 씬으로 이어지기 때문에 그 다음씬은 생성시도함
 	var precalced:=page_id+1
 	if precalced < max_scene_count:
 		var thread:=Thread.new()
 		if thread.start(self,'load_target_scene',[thread,precalced]) != OK:
+			load_target_scene([precalced])
 			thread.wait_to_finish()
 
 var mutex:=Mutex.new()
@@ -101,16 +103,25 @@ func load_target_scene(data_arr:Array,just_now:=false):
 	var target_scene=load('res://pages/%03d.tscn'%target_id).instance()
 	mutex.unlock()
 	if target_scene:
-		if just_now:
+		if just_now: # 지금 바로 변경해주세요
 			current_scene.add_child(target_scene)
 			target_scene.show()
 			target_scene.set_process_input(true)
-		else:
+		else: # 일반적인 경우
 			cache_scene.add_child(target_scene)
 	else:
 		printerr('씬 불러오기 실패: ',target_id)
 	if catch_thread:
 		catch_thread.wait_to_finish()
+
+# 이전 씬과 이후 씬 교체
+# 페이지 삭제될 때 불러와짐
+func swap_scenes(before:PageScene):
+	if not before.force_remove and cached_next_scene:
+		cache_scene.remove_child(cached_next_scene)
+		current_scene.add_child(cached_next_scene)
+		cached_next_scene.show()
+		cached_next_scene.set_process_input(true)
 
 func toggle_navigator():
 	is_navigator_open = !is_navigator_open
