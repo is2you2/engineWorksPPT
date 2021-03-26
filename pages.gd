@@ -40,10 +40,6 @@ func next_animation_stack():
 		next_animation_stack_action()
 		print_debug('다음 애니메이션 스택으로: ',current_animation_id)
 
-var force_remove:=false
-func _exit_tree():
-	Root.swap_scenes(self)
-
 # Override belows
 # 사용자가 함수로 구분해줘야함
 func previous_animation_stack_action():
@@ -55,9 +51,3 @@ func next_animation_stack_action():
 	match(current_animation_id):
 		_:
 			printerr('next_animation_stack_action 함수가 구성되지 않음 (Scene: %s / anim: %d)'%[name,current_animation_id])
-
-# 씬을 나갈 때 액션
-func _user_command_exit():
-	if force_remove:
-		queue_free()
-		return

@@ -1,4 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://pages/data/demo_theme.tres" type="Theme" id=1]
+[ext_resource path="res://pages/data/demo_headers.tres" type="Theme" id=2]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends PageScene
@@ -13,9 +16,91 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect" type="ColorRect" parent="."]
-margin_left = 245.0
-margin_top = 106.0
-margin_right = 285.0
-margin_bottom = 146.0
-color = Color( 0.501961, 0.298039, 0.298039, 1 )
+[node name="bgColor" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0745098, 0.235294, 0.341176, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="vbox" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="title" type="Label" parent="vbox"]
+margin_top = -1.0
+margin_right = 960.0
+margin_bottom = 83.0
+rect_min_size = Vector2( 0, 84 )
+theme = ExtResource( 2 )
+text = "목차"
+align = 1
+valign = 1
+
+[node name="hbox" type="HBoxContainer" parent="vbox"]
+margin_top = 84.0
+margin_right = 960.0
+margin_bottom = 540.0
+size_flags_vertical = 3
+
+[node name="m" type="MarginContainer" parent="vbox/hbox"]
+margin_right = 478.0
+margin_bottom = 456.0
+size_flags_horizontal = 3
+custom_constants/margin_top = -8
+custom_constants/margin_left = 32
+
+[node name="vbox" type="VBoxContainer" parent="vbox/hbox/m"]
+margin_left = 32.0
+margin_top = -8.0
+margin_right = 478.0
+margin_bottom = 456.0
+size_flags_horizontal = 3
+custom_constants/separation = 12
+alignment = 1
+
+[node name="Label" type="Label" parent="vbox/hbox/m/vbox"]
+margin_top = 145.0
+margin_right = 446.0
+margin_bottom = 170.0
+theme = ExtResource( 1 )
+text = "일반적인 PPT형식 모방"
+
+[node name="Label2" type="Label" parent="vbox/hbox/m/vbox"]
+margin_top = 182.0
+margin_right = 446.0
+margin_bottom = 207.0
+theme = ExtResource( 1 )
+text = "상호작용 가능한 정보 전달"
+
+[node name="Label3" type="Label" parent="vbox/hbox/m/vbox"]
+margin_top = 219.0
+margin_right = 446.0
+margin_bottom = 244.0
+theme = ExtResource( 1 )
+text = "3D 배경처리"
+
+[node name="Label4" type="Label" parent="vbox/hbox/m/vbox"]
+margin_top = 256.0
+margin_right = 446.0
+margin_bottom = 281.0
+theme = ExtResource( 1 )
+text = "프레젠테이션 중 모델 검토"
+
+[node name="Label5" type="Label" parent="vbox/hbox/m/vbox"]
+margin_top = 293.0
+margin_right = 446.0
+margin_bottom = 318.0
+theme = ExtResource( 1 )
+text = "2D 애니메이션 검토"
+
+[node name="c" type="CenterContainer" parent="vbox/hbox"]
+margin_left = 482.0
+margin_right = 960.0
+margin_bottom = 456.0
+size_flags_horizontal = 3

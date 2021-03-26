@@ -1,0 +1,69 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://pages/data/demo_headers.tres" type="Theme" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends PageScene
+
+"
+
+[node name="004" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="vc" type="ViewportContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="vc"]
+size = Vector2( 960, 540 )
+handle_input_locally = false
+render_target_update_mode = 3
+shadow_atlas_size = 512
+shadow_atlas_quad_0 = 1
+
+[node name="Spatial" type="Spatial" parent="vc/Viewport"]
+
+[node name="Camera" type="Camera" parent="vc/Viewport/Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.12706 )
+
+[node name="vbox" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="vbox"]
+margin_right = 960.0
+margin_bottom = 84.0
+rect_min_size = Vector2( 0, 84 )
+color = Color( 0, 0, 0, 0.784314 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="title" type="Label" parent="vbox/ColorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+text = "3D 배경처리"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="hbox" type="HBoxContainer" parent="vbox"]
+margin_top = 84.0
+margin_right = 960.0
+margin_bottom = 540.0
+size_flags_vertical = 3
