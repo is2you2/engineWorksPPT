@@ -14,8 +14,11 @@ const PORT:=10505
 onready var current_scene:=$'/root/Main/CurrentScene'
 onready var cache_scene:=$'/root/Main/CacheNextScene'
 
+var os_type:=OS.get_name()
+#var os_type:='Android'
+
 func _ready():
-	match(OS.get_name()):
+	match(os_type):
 		'Android': # 페이지 부르지 않음
 			pass
 		_: # PPT인 경우 대비
@@ -111,6 +114,7 @@ func load_target_scene(data_arr:Array,just_now:=false):
 	var target_res=load('res://pages/%03d.tscn'%target_id)
 	mutex.unlock()
 	var target_scene=target_res.instance()
+	target_scene.name = '%03d'%target_id
 	if target_scene:
 		if just_now: # 지금 바로 변경해주세요
 			current_scene.add_child(target_scene)
@@ -124,3 +128,7 @@ func load_target_scene(data_arr:Array,just_now:=false):
 func toggle_navigator():
 	is_navigator_open = !is_navigator_open
 	print_debug('네비게이션 토글: ',is_navigator_open)
+
+func _exit_tree():
+	if thread.is_active():
+		thread.wait_to_finish()

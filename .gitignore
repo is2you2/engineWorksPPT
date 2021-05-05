@@ -1,6 +1,7 @@
 import/*
 *.import
 *.blend1
+exports/*
 
 git_api.*
 libgitapi.so

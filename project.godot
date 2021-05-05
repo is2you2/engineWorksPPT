@@ -9,30 +9,25 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "EditorVCSInterface",
-"class": "GitAPI",
-"language": "NativeScript",
-"path": "res://git_api.gdns"
-}, {
 "base": "Control",
 "class": "PageScene",
 "language": "GDScript",
 "path": "res://pages.gd"
 } ]
 _global_script_class_icons={
-"GitAPI": "",
 "PageScene": ""
 }
 
 [application]
 
-config/name="Engine Work Ppt"
+config/name="Engine Works Ppt"
 config/description="고도엔진으로 프레젠테이션할 수 있도록 기반을 마련합니다.
 고도 에디터 상에서 씬을 구성하여 페이지를 관리해야함"
 run/main_scene="res://Main.tscn"
 boot_splash/image="res://splash.png"
 boot_splash/fullsize=false
 config/icon="res://icon.png"
+config/quit_on_go_back=false
 
 [autoload]
 
@@ -40,15 +35,18 @@ Root="*res://Root.gd"
 
 [display]
 
-window/size/width=960
+window/size/width=540
 window/size/height=540
 window/size/always_on_top=true
-window/stretch/mode="2d"
-window/stretch/aspect="keep_width"
+window/size/test_width=960
+window/handheld/orientation="portrait"
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
 
 [gdnative]
 
-singletons=[ "res://git_api.gdnlib" ]
+singletons=[  ]
+singletons_disabled=[  ]
 
 [input]
 
