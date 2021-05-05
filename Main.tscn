@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
-[ext_resource path="res://touchpad.gd" type="Script" id=2]
 [ext_resource path="res://WSServer.gd" type="Script" id=3]
 [ext_resource path="res://WSClient.gd" type="Script" id=4]
 [ext_resource path="res://data/default.tres" type="Theme" id=5]
@@ -129,7 +128,7 @@ text = "Connect"
 [node name="m" type="MarginContainer" parent="RemoteUI"]
 margin_top = 249.0
 margin_right = 540.0
-margin_bottom = 465.0
+margin_bottom = 437.0
 size_flags_vertical = 3
 custom_constants/margin_right = 8
 custom_constants/margin_left = 8
@@ -138,9 +137,26 @@ custom_constants/margin_bottom = 8
 [node name="touchpad" type="ColorRect" parent="RemoteUI/m"]
 margin_left = 8.0
 margin_right = 532.0
-margin_bottom = 208.0
+margin_bottom = 180.0
 color = Color( 0.196078, 0.196078, 0.196078, 1 )
-script = ExtResource( 2 )
+
+[node name="m6" type="MarginContainer" parent="RemoteUI"]
+margin_top = 441.0
+margin_right = 540.0
+margin_bottom = 465.0
+custom_constants/margin_right = 32
+custom_constants/margin_left = 32
+custom_constants/margin_bottom = 8
+
+[node name="ratio" type="HSlider" parent="RemoteUI/m6"]
+margin_left = 32.0
+margin_right = 508.0
+margin_bottom = 16.0
+theme = ExtResource( 5 )
+min_value = 0.5
+max_value = 3.0
+step = 0.01
+value = 1.0
 
 [node name="m2" type="MarginContainer" parent="RemoteUI"]
 margin_top = 469.0
@@ -232,6 +248,7 @@ anims/tog_alert = SubResource( 1 )
 
 [connection signal="pressed" from="RemoteUI/m5/end" to="." method="_on_end_pressed"]
 [connection signal="pressed" from="RemoteUI/m4/hbox/connect" to="." method="_on_connect_pressed"]
+[connection signal="gui_input" from="RemoteUI/m/touchpad" to="." method="_on_touchpad_gui_input"]
 [connection signal="pressed" from="RemoteUI/m2/hbox/<<<" to="WSClient" method="arrow_button" binds= [ "<<<" ]]
 [connection signal="pressed" from="RemoteUI/m2/hbox/<<" to="WSClient" method="arrow_button" binds= [ "<<" ]]
 [connection signal="pressed" from="RemoteUI/m2/hbox/<" to="WSClient" method="arrow_button" binds= [ "<" ]]

@@ -28,8 +28,8 @@ func _received(id:int,_try_left:=5):
 		var json = JSON.parse(data).result
 		if json is Dictionary:
 			match(json):
-				{'status': var _status,'pos': var _pos}: # 마우스 액션
-					mouse_action(_status, _pos)
+				{'status': 'mouse', ..}: # 마우스 액션
+					mouse_action(json)
 				{'status':'type', 'text': var _text}: # 문자열 타이핑
 					# grabbed-focus 에 입력하기
 					pass
@@ -62,9 +62,11 @@ func _received(id:int,_try_left:=5):
 			server.disconnect_peer(id,1005,'파일 받기 5회 지연')
 
 # 수신받은 정보를 마우스 행동으로 옮김
-func mouse_action(_status:String, _pos:Array):
-	print_debug(_status, ' / ' ,_pos)
-	pass
+func mouse_action(_info:Dictionary):
+	var current_mouse:= get_viewport().get_mouse_position()
+	if _info.has('0'):
+		var tick_pos = str2var('Vector2'+_info['0']['relative_tick']) as Vector2
+		get_viewport().warp_mouse(current_mouse + tick_pos)
 
 
 func _process(_delta):

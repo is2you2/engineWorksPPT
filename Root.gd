@@ -63,7 +63,7 @@ func _input(event):
 		toggle_navigator()
 
 func previous_scene():
-	var precalced:=current_scene_id-1
+	var precalced:=current_scene_id - 1
 	if precalced >= 0:
 		move_to_scene(precalced)
 	else:
@@ -71,7 +71,7 @@ func previous_scene():
 		print('네비게이터 열기 예정')
 
 func next_scene():
-	var precalced:=current_scene_id+1
+	var precalced:=current_scene_id + 1
 	if precalced < max_scene_count:
 		move_to_scene(precalced)
 	else: # 네비게이터 열기

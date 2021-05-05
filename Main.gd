@@ -35,3 +35,33 @@ func send_req(msg:String):
 func _on_end_pressed():
 	$WSClient.send('ESC'.to_utf8())
 	get_tree().quit()
+
+
+var touches:Dictionary = {
+	'status':'mouse', # 고정
+	'act': 'move',
+	'button': [],
+} # 마우스 액션
+func _on_touchpad_gui_input(event):
+	if event is InputEventScreenTouch:
+		var i = event.index
+		if event.is_pressed():
+			if i == 0:
+				touches['button'].push_back(0)
+				touches[i] = {}
+				touches[i]['last_pos'] = event.position
+				touches[i]['relative_tick'] = Vector2.ZERO
+			elif i < 3:
+				touches['button'].push_back(i)
+		else:
+			touches['button'].clear()
+			touches.erase(i)
+		send_req(JSON.print(touches))
+	if event is InputEventScreenDrag:
+		var i = event.index
+		if i == 0:
+			touches[i]['relative_tick'] = (
+				event.position - touches[i]['last_pos']
+			) * $RemoteUI/m6/ratio.value
+			touches[i]['last_pos'] = event.position
+			send_req(JSON.print(touches))
