@@ -8,22 +8,28 @@ var current_scene_id:=0
 # 현재 네비게이터 상태
 var is_navigator_open:=false
 var thread:=Thread.new()
+# 리모콘 통신 포트
+const PORT:=10505
 
 onready var current_scene:=$'/root/Main/CurrentScene'
 onready var cache_scene:=$'/root/Main/CacheNextScene'
 
 func _ready():
-	if not OS.is_debug_build(): # 릴리즈시 전체화면
-		OS.window_fullscreen = true
-	check_pages()
-	if max_scene_count > 0:
-		move_to_scene(0)
-	else:
-		printerr('페이지 구성 없음')
-		get_tree().quit()
-	yield(get_tree().create_timer(0),"timeout")
-	for current in current_scene.get_children():
-		current.set_process_input(true)
+	match(OS.get_name()):
+		'Android': # 페이지 부르지 않음
+			pass
+		_: # PPT인 경우 대비
+			if not OS.is_debug_build(): # 릴리즈시 전체화면
+				OS.window_fullscreen = true
+			check_pages()
+			if max_scene_count > 0:
+				move_to_scene(0)
+			else:
+				printerr('페이지 구성 없음')
+				get_tree().quit()
+			yield(get_tree().create_timer(0),"timeout")
+			for current in current_scene.get_children():
+				current.set_process_input(true)
 
 # pages 폴더 안에 얼마나 구성되어있나
 func check_pages():
@@ -70,6 +76,8 @@ func next_scene():
 		print('네비게이터 열기 예정')
 
 func move_to_scene(page_id:int):
+	if thread.is_active():
+		thread.wait_to_finish()
 	print_debug('이 장면으로 이동:', page_id)
 	for current in current_scene.get_children():
 		current_scene.remove_child(current)
@@ -112,8 +120,6 @@ func load_target_scene(data_arr:Array,just_now:=false):
 			cache_scene.call_deferred('add_child',target_scene)
 	else:
 		printerr('씬 불러오기 실패: ',target_id)
-	if thread.is_active():
-		thread.wait_to_finish()
 
 func toggle_navigator():
 	is_navigator_open = !is_navigator_open
