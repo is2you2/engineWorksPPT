@@ -47,11 +47,11 @@ func _received(_try_left:=5):
 func _process(_delta):
 	client.poll()
 
-func page_button(arrow:String):
+func arrow_button(arrow:String):
 	send(arrow.to_utf8())
 
 func send(msg:PoolByteArray,_try_left:=5):
-	if client.get_peer(1).put_packet(msg) == OK:
+	if client.get_peer(1).put_packet(msg) != OK:
 		if _try_left > 0:
 			send(msg,_try_left - 1)
 		else:

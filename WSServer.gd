@@ -28,10 +28,31 @@ func _received(id:int,_try_left:=5):
 		var json = JSON.parse(data).result
 		if json is Dictionary:
 			match(json):
+				{'status': var _status,'pos': var _pos}: # 마우스 액션
+					mouse_action(_status, _pos)
+				{'status':'type', 'text': var _text}: # 문자열 타이핑
+					# grabbed-focus 에 입력하기
+					pass
 				_:
 					pass
 		else:
 			match(data):
+				'<<<':
+					Root.move_to_scene(0)
+				'<<':
+					Root.previous_scene()
+				'<':
+					var page:PageScene = Root.current_scene.get_child(0)
+					page.previous_animation_stack()
+				'>':
+					var page:PageScene = Root.current_scene.get_child(0)
+					page.next_animation_stack()
+				'>>':
+					Root.next_scene()
+				'>>>':
+					Root.move_to_scene(Root.max_scene_count - 1)
+				'ESC':
+					get_tree().quit()
 				_:
 					pass
 	else:
@@ -40,11 +61,17 @@ func _received(id:int,_try_left:=5):
 		else:
 			server.disconnect_peer(id,1005,'파일 받기 5회 지연')
 
+# 수신받은 정보를 마우스 행동으로 옮김
+func mouse_action(_status:String, _pos:Array):
+	print_debug(_status, ' / ' ,_pos)
+	pass
+
+
 func _process(_delta):
 	server.poll()
 
 func send_to(id:int,msg:PoolByteArray,_try_left:=5):
-	if server.get_peer(id).put_packet(msg) == OK:
+	if server.get_peer(id).put_packet(msg) != OK:
 		if _try_left > 0:
 			send_to(id,msg,_try_left - 1)
 		else:

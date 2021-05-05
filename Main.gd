@@ -13,12 +13,10 @@ func _ready():
 			$Alert.queue_free()
 			$WSServer.start_server()
 
-
 func _on_connect_pressed():
 	if $RemoteUI/m4/hbox/address.text:
 		$WSClient.connect_to_server($RemoteUI/m4/hbox/address.text)
 
-# 서버도 클라이언트도 1:1 매칭이 성공하면 방송처리를 취소함
 func connection_established():
 	if Root.os_type == 'Android':
 		$RemoteUI/m4.queue_free()
@@ -28,3 +26,12 @@ func tog_alert(_text:String):
 	$AnimationPlayer.play("tog_alert")
 	yield(get_tree().create_timer(4),"timeout")
 	$AnimationPlayer.play_backwards("tog_alert")
+
+# 클라이언트 발송 요청
+func send_req(msg:String):
+	$WSClient.send(msg.to_utf8())
+
+# 클라이언트에서 종료 요청시
+func _on_end_pressed():
+	$WSClient.send('ESC'.to_utf8())
+	get_tree().quit()
