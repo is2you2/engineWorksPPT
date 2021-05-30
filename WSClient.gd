@@ -22,7 +22,7 @@ func _established(proto:='기본 프로토콜'):
 
 func _disconnected(was_clean=null,reason:='연결 끊김'):
 	get_parent().tog_alert('서버 연결 끊김')
-	queue_free()
+	get_parent()._on_client_disconnected()
 
 func _received(_try_left:=5):
 	var err:= client.get_peer(1).get_packet_error()

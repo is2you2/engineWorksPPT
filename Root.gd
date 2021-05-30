@@ -15,7 +15,6 @@ onready var current_scene:=$'/root/Main/CurrentScene'
 onready var cache_scene:=$'/root/Main/CacheNextScene'
 
 var os_type:=OS.get_name()
-#var os_type:='Android'
 
 func _ready():
 	match(os_type):
@@ -102,9 +101,8 @@ func move_to_scene(page_id:int):
 	var precalced:= page_id+1
 	if precalced < max_scene_count:
 		if thread.start(self,'load_target_scene',[precalced]) != OK:
-			print_debug('쓰레드 시작 실패')
+			printerr('쓰레드 시작 실패')
 			load_target_scene([precalced])
-			thread.wait_to_finish()
 
 var mutex:=Mutex.new()
 # 다음 씬 불러오기

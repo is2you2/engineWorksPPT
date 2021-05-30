@@ -64,10 +64,28 @@ func _received(id:int,_try_left:=5):
 # 수신받은 정보를 마우스 행동으로 옮김
 func mouse_action(_info:Dictionary):
 	var current_mouse:= get_viewport().get_mouse_position()
+	sep_mouse_act(_info['act'])
 	if _info.has('0'):
 		var tick_pos = str2var('Vector2'+_info['0']['relative_tick']) as Vector2
 		get_viewport().warp_mouse(current_mouse + tick_pos)
 
+var last_down:=0
+const CLICK_TERM:=120 # 클릭으로 간주할 탭 시간, msec
+func sep_mouse_act(_act:String):
+	match(_act):
+		'touch_down': # 첫 터치 감지됨
+			last_down = OS.get_ticks_msec()
+		'touch_up': # 첫 터치가 떼짐
+			var tmp:= OS.get_ticks_msec() - last_down
+			if tmp < CLICK_TERM: # 클릭으로 간주
+				var ev = InputEventMouseButton.new()
+				ev.pressed = true
+				ev.button_index = BUTTON_LEFT
+				ev.position = get_viewport().get_mouse_position()
+				get_tree().input_event(ev)
+				yield(get_tree().create_timer(.07),"timeout")
+				ev.pressed = false
+				get_tree().input_event(ev)
 
 func _process(_delta):
 	server.poll()
