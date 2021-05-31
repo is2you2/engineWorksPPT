@@ -77,7 +77,11 @@ func next_scene():
 		print('다음 씬 없음: (%d+1)/%d'%[current_scene_id,max_scene_count-1])
 		print('네비게이터 열기 예정')
 
+var enable_change:= true
 func move_to_scene(page_id:int):
+	if not enable_change:
+		return
+	enable_change = false
 	if thread.is_active():
 		thread.wait_to_finish()
 	print_debug('이 장면으로 이동:', page_id)
@@ -103,6 +107,8 @@ func move_to_scene(page_id:int):
 		if thread.start(self,'load_target_scene',[precalced]) != OK:
 			printerr('쓰레드 시작 실패')
 			load_target_scene([precalced])
+	yield(get_tree().create_timer(.1),"timeout")
+	enable_change = true
 
 var mutex:=Mutex.new()
 # 다음 씬 불러오기
