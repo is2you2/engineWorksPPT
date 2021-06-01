@@ -2,9 +2,9 @@
 
 [ext_resource path="res://pages/data/fonts/NotoSansCJKkr-Regular.otf" type="DynamicFontData" id=1]
 
-[sub_resource type="DynamicFont" id=2]
-size = 36
+[sub_resource type="DynamicFont" id=1]
+size = 64
 font_data = ExtResource( 1 )
 
 [resource]
-default_font = SubResource( 2 )
+default_font = SubResource( 1 )

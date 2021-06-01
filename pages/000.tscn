@@ -1,92 +1,32 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://pages/data/demo_theme.tres" type="Theme" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
-[ext_resource path="res://pages/data/gfx/icon.png" type="Texture" id=3]
+[ext_resource path="res://pages.gd" type="Script" id=1]
+[ext_resource path="res://pages/data/Title.tres" type="Theme" id=2]
 
-[sub_resource type="GDScript" id=1]
-script/source = "extends PageScene
-
-var fade_val:=1.0
-
-func _ready():
-	._ready()
-	set_process(false)
-
-func _process(delta):
-	if fade_val > 0:
-		fade_val -= delta * 3
-		$center.modulate.a = fade_val
-	else:
-		set_process(false)
-		yield(get_tree().create_timer(.2),\"timeout\")
-		Root.next_scene()
-
-func next_animation_stack_action():
-	match(current_animation_id):
-		1:
-			set_process(true)
-		_: # 이전 애니메이션과 대비했을때 변경점
-			printerr('next_animation_stack_action 함수가 구성되지 않음 (Scene: %s / anim: %d)'%[name,current_animation_id])
-"
-
-[node name="000" type="Control"]
+[node name="PageScene" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = SubResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-max_animation_stack = 1
-
-[node name="bgColor" type="ColorRect" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color( 0.0745098, 0.235294, 0.341176, 1 )
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="center" type="CenterContainer" parent="."]
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.145098, 0.145098, 0.145098, 1 )
+
+[node name="c" type="CenterContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="vbox" type="VBoxContainer" parent="center"]
-margin_left = 391.0
-margin_top = 195.0
-margin_right = 568.0
-margin_bottom = 344.0
-
-[node name="hbox" type="HBoxContainer" parent="center/vbox"]
-margin_right = 177.0
-margin_bottom = 64.0
-custom_constants/separation = 24
-alignment = 1
-
-[node name="icon" type="TextureRect" parent="center/vbox/hbox"]
-margin_left = 12.0
-margin_right = 76.0
-margin_bottom = 64.0
-texture = ExtResource( 3 )
-stretch_mode = 6
-
-[node name="logo" type="TextureRect" parent="center/vbox/hbox"]
-margin_left = 100.0
-margin_right = 164.0
-margin_bottom = 64.0
-texture = ExtResource( 2 )
-stretch_mode = 6
-
-[node name="title" type="Label" parent="center/vbox"]
-margin_top = 68.0
-margin_right = 177.0
-margin_bottom = 149.0
-theme = ExtResource( 1 )
-text = "
-EngineWork PPT
-고도 엔진으로 피피티 생성"
-align = 1
-valign = 1
+[node name="Label" type="Label" parent="c"]
+margin_left = 485.0
+margin_top = 312.0
+margin_right = 794.0
+margin_bottom = 408.0
+theme = ExtResource( 2 )
+text = "유니티 엔진"

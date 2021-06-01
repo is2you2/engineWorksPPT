@@ -35,10 +35,9 @@ Root="*res://Root.gd"
 
 [display]
 
-window/size/width=540
-window/size/height=540
+window/size/width=1280
+window/size/height=720
 window/size/always_on_top=true
-window/size/test_width=960
 window/handheld/orientation="portrait"
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
@@ -96,7 +95,6 @@ pointing/emulate_touch_from_mouse=true
 
 [rendering]
 
-quality/driver/driver_name="GLES2"
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
 environment/default_environment="res://default_env.tres"
