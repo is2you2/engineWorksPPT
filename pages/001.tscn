@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://pages/data/scripts/videoplayer.gd" type="Script" id=1]
 [ext_resource path="res://pages/data/Title.tres" type="Theme" id=2]
-[ext_resource path="res://pages/data/gfx/character_start_0045-1364.webm" type="VideoStream" id=3]
 
 [node name="PageScene" type="Control"]
 anchor_right = 1.0
@@ -38,29 +37,28 @@ margin_right = 1216.0
 margin_bottom = 104.0
 
 [node name="Label" type="Label" parent="VBoxContainer/m2/CenterContainer"]
-margin_left = 172.0
-margin_right = 980.0
+margin_left = 264.0
+margin_right = 888.0
 margin_bottom = 96.0
 theme = ExtResource( 2 )
-text = "캐릭터 생성 (에셋 스토어 활용)"
+text = "Sample Presentation"
 
 [node name="m" type="MarginContainer" parent="VBoxContainer"]
 margin_top = 108.0
 margin_right = 1280.0
-margin_bottom = 724.0
+margin_bottom = 720.0
 size_flags_vertical = 3
 
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/m"]
 margin_right = 1280.0
-margin_bottom = 616.0
+margin_bottom = 612.0
 
 [node name="VideoPlayer" type="VideoPlayer" parent="VBoxContainer/m/CenterContainer"]
 margin_left = 128.0
-margin_top = 20.0
+margin_top = 18.0
 margin_right = 1152.0
-margin_bottom = 596.0
+margin_bottom = 594.0
 rect_min_size = Vector2( 1024, 576 )
-stream = ExtResource( 3 )
 
 [connection signal="finished" from="VBoxContainer/m/CenterContainer/VideoPlayer" to="." method="_on_VideoPlayer_finished"]
 [connection signal="gui_input" from="VBoxContainer/m/CenterContainer/VideoPlayer" to="." method="_on_VideoPlayer_gui_input"]

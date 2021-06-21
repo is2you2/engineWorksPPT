@@ -34,6 +34,8 @@ func _ready():
 				current.set_process_input(true)
 
 # pages 폴더 안에 얼마나 구성되어있나
+# pages 폴더 내 씬 파일 리스트를 관리
+var all_pages:=[]
 func check_pages():
 	var dir:=Directory.new()
 	if dir.open('res://pages') == OK:
@@ -41,8 +43,10 @@ func check_pages():
 		var file_name:=dir.get_next()
 		while file_name:
 			if file_name.find('.tscn') + 1:
-				max_scene_count += 1
+				all_pages.push_back(file_name)
 			file_name=dir.get_next()
+		max_scene_count = all_pages.size()
+		all_pages.sort()
 		dir.list_dir_end()
 	else:
 		printerr('pages 열람 실패')
@@ -115,8 +119,9 @@ var mutex:=Mutex.new()
 func load_target_scene(data_arr:Array,just_now:=false):
 	var target_id = data_arr.pop_back()
 	mutex.lock()
-	var target_res=load('res://pages/%03d.tscn'%target_id)
+	var target_res=load('res://pages/%s'%all_pages[target_id])
 	mutex.unlock()
+	print_debug('res://pages/%s'%all_pages[target_id])
 	var target_scene=target_res.instance()
 	target_scene.name = '%03d'%target_id
 	if target_scene:

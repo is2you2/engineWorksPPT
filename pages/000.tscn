@@ -24,9 +24,11 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="c"]
-margin_left = 367.0
-margin_top = 312.0
-margin_right = 912.0
-margin_bottom = 408.0
+margin_left = 366.0
+margin_top = 262.0
+margin_right = 914.0
+margin_bottom = 457.0
 theme = ExtResource( 2 )
-text = "캐릭터와 애니메이션"
+text = "Engine Works PPT
+with Godot engine"
+align = 1
