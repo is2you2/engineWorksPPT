@@ -59,6 +59,7 @@ margin_top = 18.0
 margin_right = 1152.0
 margin_bottom = 594.0
 rect_min_size = Vector2( 1024, 576 )
+autoplay = true
 
 [connection signal="finished" from="VBoxContainer/m/CenterContainer/VideoPlayer" to="." method="_on_VideoPlayer_finished"]
 [connection signal="gui_input" from="VBoxContainer/m/CenterContainer/VideoPlayer" to="." method="_on_VideoPlayer_gui_input"]

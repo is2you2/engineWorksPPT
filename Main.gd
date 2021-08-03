@@ -25,10 +25,10 @@ const LICENSE_PATH:='res://docs/%s.txt'
 func load_license_log(_target:String) -> String:
 	var result:=''
 	var file:=File.new()
-	file.open(LICENSE_PATH%_target,File.READ)
-	result = file.get_as_text()
-	file.close()
-	result.trim_suffix('\n')
+	if file.open(LICENSE_PATH%_target,File.READ) == OK:
+		result = file.get_as_text()
+		file.close()
+		result.trim_suffix('\n')
 	return result
 
 func _on_connect_pressed():
