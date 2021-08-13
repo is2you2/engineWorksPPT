@@ -7,7 +7,7 @@ var max_scene_count:=0
 var current_scene_id:=0
 # 현재 네비게이터 상태
 var is_navigator_open:=false
-var thread:=Thread.new()
+#var thread:=Thread.new()
 # 리모콘 통신 포트
 const PORT:=10505
 
@@ -81,13 +81,9 @@ func next_scene():
 		print('다음 씬 없음: (%d+1)/%d'%[current_scene_id,max_scene_count-1])
 		print('네비게이터 열기 예정')
 
-var enable_change:= true
 func move_to_scene(page_id:int):
-	if not enable_change:
-		return
-	enable_change = false
-	if thread.is_active():
-		thread.wait_to_finish()
+#	if thread.is_active():
+#		thread.wait_to_finish()
 	print_debug('이 장면으로 이동:', page_id)
 	for current in current_scene.get_children():
 		current_scene.remove_child(current)
@@ -108,19 +104,18 @@ func move_to_scene(page_id:int):
 	# 보통 다음 씬으로 이어지기 때문에 그 다음씬은 생성시도함
 	var precalced:= page_id+1
 	if precalced < max_scene_count:
-		if thread.start(self,'load_target_scene',[precalced]) != OK:
-			printerr('쓰레드 시작 실패')
-			load_target_scene([precalced])
-	yield(get_tree().create_timer(.1),"timeout")
-	enable_change = true
+#		var err:= thread.start(self,'load_target_scene',[precalced])
+#		if err != OK:
+#			printerr('쓰레드 시작 실패: ', err)
+		load_target_scene([precalced])
 
-var mutex:=Mutex.new()
+#var mutex:=Mutex.new()
 # 다음 씬 불러오기
 func load_target_scene(data_arr:Array,just_now:=false):
 	var target_id = data_arr.pop_back()
-	mutex.lock()
+#	mutex.lock()
 	var target_res=load('res://pages/%s'%all_pages[target_id])
-	mutex.unlock()
+#	mutex.unlock()
 	print_debug('res://pages/%s'%all_pages[target_id])
 	var target_scene=target_res.instance()
 	target_scene.name = '%03d'%target_id
@@ -138,6 +133,6 @@ func toggle_navigator():
 	is_navigator_open = !is_navigator_open
 	print_debug('네비게이션 토글: ',is_navigator_open)
 
-func _exit_tree():
-	if thread.is_active():
-		thread.wait_to_finish()
+#func _exit_tree():
+#	if thread.is_active():
+#		thread.wait_to_finish()
