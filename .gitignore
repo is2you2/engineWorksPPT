@@ -23,3 +23,6 @@ test_files/
 .text_editor_state.json
 word_skip_list.txt
 
+# System/tool-specific ignores
+.directory
+*~

@@ -48,6 +48,10 @@ config/name="engineWorksPPT"
 run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
 
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/terminal/plugin.cfg", "res://addons/text_editor/plugin.cfg" )
+
 [gdnative]
 
 singletons=[ "res://git_api.gdnlib" ]

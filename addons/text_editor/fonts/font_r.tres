@@ -1,6 +1,6 @@
 [gd_resource type="DynamicFont" load_steps=4 format=2]
 
-[ext_resource path="res://addons/text_editor/fonts/RobotoMono-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://data/fonts/Noto_Sans_KR/NotoSansKR-Regular.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://addons/text_editor/fonts/unifont_upper-13.0.01.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://addons/text_editor/fonts/unifont-13.0.01.ttf" type="DynamicFontData" id=3]
 
