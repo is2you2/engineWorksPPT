@@ -1,0 +1,25 @@
+*.import
+import/*
+*.blend1
+*.translation
+diy_config/*
+android/*
+*.tmp
+html/*
+*.bak
+
+# git_api 무시
+git_api.*
+libgitapi.so
+
+# Mono-specific ignores
+.mono/
+data_*/
+
+# Text editor related
+test_files/
+.trash/
+.trash.json
+.text_editor_state.json
+word_skip_list.txt
+
