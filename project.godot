@@ -13,9 +13,33 @@ _global_script_classes=[ {
 "class": "GitAPI",
 "language": "NativeScript",
 "path": "res://git_api.gdns"
+}, {
+"base": "Control",
+"class": "TE_Editor",
+"language": "GDScript",
+"path": "res://addons/text_editor/TE_Editor.gd"
+}, {
+"base": "Resource",
+"class": "TE_ExtensionHelper",
+"language": "GDScript",
+"path": "res://addons/text_editor/ext/TE_ExtensionHelper.gd"
+}, {
+"base": "Reference",
+"class": "TE_StopWords",
+"language": "GDScript",
+"path": "res://addons/text_editor/TE_StopWords.gd"
+}, {
+"base": "Reference",
+"class": "TE_Util",
+"language": "GDScript",
+"path": "res://addons/text_editor/TE_Util.gd"
 } ]
 _global_script_class_icons={
-"GitAPI": ""
+"GitAPI": "",
+"TE_Editor": "",
+"TE_ExtensionHelper": "",
+"TE_StopWords": "",
+"TE_Util": ""
 }
 
 [application]
