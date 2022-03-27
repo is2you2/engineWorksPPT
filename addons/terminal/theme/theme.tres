@@ -1,12 +1,12 @@
 [gd_resource type="Theme" load_steps=5 format=2]
 
 [ext_resource path="res://addons/terminal/theme/black.tres" type="StyleBox" id=1]
-[ext_resource path="res://addons/text_editor/fonts/unifont-13.0.01.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://addons/terminal/theme/LiberationMono-Regular.ttf" type="DynamicFontData" id=2]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
 [sub_resource type="DynamicFont" id=2]
-size = 13
+size = 12
 use_filter = true
 font_data = ExtResource( 2 )
 

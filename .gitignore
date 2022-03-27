@@ -2,19 +2,24 @@
 import/*
 *.blend1
 *.translation
-diy_config/*
 android/*
 *.tmp
 html/*
 *.bak
+result/*
+
+# FileEdit 읽은파일 무시
+addons/file-editor/lastopenedfiles.lastcfg
 
 # git_api 무시
 git_api.*
-libgitapi.so
+libgitapi.*
+.github/
 
 # Mono-specific ignores
 .mono/
 data_*/
+mono_crash.*.json
 
 # Text editor related
 test_files/
@@ -23,6 +28,18 @@ test_files/
 .text_editor_state.json
 word_skip_list.txt
 
+# NakamaClient ignores
+*.swp
+test_suite/addons
+test_suite/addons/*
+test_suite/.import/*
+
 # System/tool-specific ignores
 .directory
 *~
+
+# Plugin specific ignores
+icons.pngs/
+fonts/
+file.samples/
+icon.png
