@@ -12,40 +12,16 @@ _global_script_classes=[ {
 "base": "",
 "class": "GitAPI",
 "language": "NativeScript",
-"path": "res://git_api.gdns"
+"path": "res://addons/godot-git-plugin/git_api.gdns"
 }, {
 "base": "Control",
 "class": "PageScene",
 "language": "GDScript",
 "path": "res://pages.gd"
-}, {
-"base": "Control",
-"class": "TE_Editor",
-"language": "GDScript",
-"path": "res://addons/text_editor/TE_Editor.gd"
-}, {
-"base": "Resource",
-"class": "TE_ExtensionHelper",
-"language": "GDScript",
-"path": "res://addons/text_editor/ext/TE_ExtensionHelper.gd"
-}, {
-"base": "Reference",
-"class": "TE_StopWords",
-"language": "GDScript",
-"path": "res://addons/text_editor/TE_StopWords.gd"
-}, {
-"base": "Reference",
-"class": "TE_Util",
-"language": "GDScript",
-"path": "res://addons/text_editor/TE_Util.gd"
 } ]
 _global_script_class_icons={
 "GitAPI": "",
-"PageScene": "",
-"TE_Editor": "",
-"TE_ExtensionHelper": "",
-"TE_StopWords": "",
-"TE_Util": ""
+"PageScene": ""
 }
 
 [application]
@@ -71,13 +47,18 @@ window/handheld/orientation="portrait"
 window/stretch/mode="2d"
 window/stretch/aspect="expand"
 
+[editor]
+
+version_control_autoload_on_startup=true
+version_control_plugin_name="GitAPI"
+
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/terminal/plugin.cfg", "res://addons/text_editor/plugin.cfg" )
+enabled=PoolStringArray(  )
 
 [gdnative]
 
-singletons=[ "res://git_api.gdnlib" ]
+singletons=[  ]
 singletons_disabled=[  ]
 
 [input]
