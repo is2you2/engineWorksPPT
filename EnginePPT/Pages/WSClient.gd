@@ -36,6 +36,7 @@ func _received(_try_left:= 5):
 					pass
 	else:
 		if _try_left > 0:
+			yield(get_tree(), "idle_frame")
 			_received(_try_left - 1)
 		else:
 			printerr('RemoteContr. receive try left out')
