@@ -1,6 +1,154 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://EnginePPT/EnginePPTContr.gd" type="Script" id=1]
+[ext_resource path="res://EnginePPT/Device.gd" type="Script" id=2]
+
+[sub_resource type="CubeMesh" id=1]
+size = Vector3( 0.5, 0.5, 1 )
+
+[sub_resource type="PlaneMesh" id=2]
+size = Vector2( 9.6, 5.4 )
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 4.8, 0.2, 2.7 )
 
 [node name="EnginePPTContr" type="Node"]
 script = ExtResource( 1 )
+
+[node name="Device" type="Spatial" parent="."]
+script = ExtResource( 2 )
+
+[node name="Horizontal" type="Spatial" parent="Device"]
+
+[node name="Vertical" type="Spatial" parent="Device/Horizontal"]
+
+[node name="MeshInstance" type="MeshInstance" parent="Device/Horizontal/Vertical"]
+mesh = SubResource( 1 )
+
+[node name="RayCast" type="RayCast" parent="Device/Horizontal/Vertical"]
+enabled = true
+cast_to = Vector3( 0, 0, 10 )
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="VirtualScreenPos" type="Spatial" parent="Device/Horizontal/Vertical"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 4 )
+
+[node name="VirtualScreen" type="MeshInstance" parent="Device"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 4 )
+mesh = SubResource( 2 )
+skeleton = NodePath("../Horizontal/Vertical")
+
+[node name="Area" type="Area" parent="Device/VirtualScreen"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Device/VirtualScreen/Area"]
+shape = SubResource( 3 )
+
+[node name="TouchScreen" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="vbox" type="VBoxContainer" parent="TouchScreen"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 0
+
+[node name="Scale" type="MarginContainer" parent="TouchScreen/vbox"]
+margin_right = 1024.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 0, 80 )
+custom_constants/margin_right = 8
+custom_constants/margin_top = 8
+custom_constants/margin_left = 8
+
+[node name="Touches" type="ColorRect" parent="TouchScreen/vbox/Scale"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 1016.0
+margin_bottom = 80.0
+color = Color( 0.156863, 0.156863, 0.156863, 1 )
+
+[node name="TouchPlace" type="MarginContainer" parent="TouchScreen/vbox"]
+margin_top = 80.0
+margin_right = 1024.0
+margin_bottom = 504.0
+size_flags_vertical = 3
+custom_constants/margin_right = 8
+custom_constants/margin_top = 8
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 8
+
+[node name="Touches" type="ColorRect" parent="TouchScreen/vbox/TouchPlace"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 1016.0
+margin_bottom = 416.0
+color = Color( 0.376471, 0.376471, 0.376471, 1 )
+
+[node name="hbox" type="HBoxContainer" parent="TouchScreen/vbox"]
+margin_top = 504.0
+margin_right = 1024.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 0, 96 )
+custom_constants/separation = 0
+
+[node name="m" type="MarginContainer" parent="TouchScreen/vbox/hbox"]
+margin_right = 341.0
+margin_bottom = 96.0
+size_flags_horizontal = 3
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 8
+
+[node name="GoPrev" type="ColorRect" parent="TouchScreen/vbox/hbox/m"]
+margin_left = 8.0
+margin_right = 341.0
+margin_bottom = 88.0
+size_flags_horizontal = 3
+color = Color( 0.215686, 0.215686, 0.215686, 1 )
+
+[node name="PrevPage" type="ToolButton" parent="TouchScreen/vbox/hbox/m/GoPrev"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="m2" type="MarginContainer" parent="TouchScreen/vbox/hbox"]
+margin_left = 341.0
+margin_right = 682.0
+margin_bottom = 96.0
+size_flags_horizontal = 3
+custom_constants/margin_right = 4
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 8
+
+[node name="SetCenter" type="ColorRect" parent="TouchScreen/vbox/hbox/m2"]
+margin_left = 8.0
+margin_right = 337.0
+margin_bottom = 88.0
+size_flags_horizontal = 3
+color = Color( 0.215686, 0.215686, 0.215686, 1 )
+
+[node name="Screen" type="ToolButton" parent="TouchScreen/vbox/hbox/m2/SetCenter"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="m3" type="MarginContainer" parent="TouchScreen/vbox/hbox"]
+margin_left = 682.0
+margin_right = 1024.0
+margin_bottom = 96.0
+size_flags_horizontal = 3
+custom_constants/margin_right = 8
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 8
+
+[node name="GoNext" type="ColorRect" parent="TouchScreen/vbox/hbox/m3"]
+margin_left = 4.0
+margin_right = 334.0
+margin_bottom = 88.0
+size_flags_horizontal = 3
+color = Color( 0.215686, 0.215686, 0.215686, 1 )
+
+[node name="NextPage" type="ToolButton" parent="TouchScreen/vbox/hbox/m3/GoNext"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[connection signal="calced_pos" from="Device" to="." method="_on_Device_calced_pos"]
+[connection signal="pressed" from="TouchScreen/vbox/hbox/m2/SetCenter/Screen" to="." method="set_virtual_screen_pos"]
