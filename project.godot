@@ -9,7 +9,7 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "",
+"base": "EditorVCSInterface",
 "class": "GitAPI",
 "language": "NativeScript",
 "path": "res://addons/godot-git-plugin/git_api.gdns"
@@ -24,10 +24,6 @@ config/name="engineWorksPPT"
 run/main_scene="res://EnginePPT.tscn"
 config/icon="res://icon.png"
 
-[autoload]
-
-LastOpenedFiles="*res://addons/file-editor/scripts/LastOpenedFiles.gd"
-
 [editor]
 
 version_control_autoload_on_startup=true
@@ -35,11 +31,15 @@ version_control_plugin_name="GitAPI"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/file-editor/plugin.cfg", "res://addons/terminal/plugin.cfg" )
+enabled=PoolStringArray(  )
 
 [gdnative]
 
 singletons=[  ]
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
 
 [physics]
 
