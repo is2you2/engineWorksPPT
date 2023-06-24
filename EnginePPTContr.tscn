@@ -151,4 +151,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [connection signal="calced_pos" from="Device" to="." method="_on_Device_calced_pos"]
+[connection signal="pressed" from="TouchScreen/vbox/hbox/m/GoPrev/PrevPage" to="." method="move_page_clicked" binds= [ "Prev" ]]
 [connection signal="pressed" from="TouchScreen/vbox/hbox/m2/SetCenter/Screen" to="." method="set_virtual_screen_pos"]
+[connection signal="pressed" from="TouchScreen/vbox/hbox/m3/GoNext/NextPage" to="." method="move_page_clicked" binds= [ "Next" ]]

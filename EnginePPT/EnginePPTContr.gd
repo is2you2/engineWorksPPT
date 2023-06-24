@@ -35,7 +35,24 @@ func set_virtual_screen_pos():
 	$Device/VirtualScreen.global_translation = $Device/Horizontal/Vertical/VirtualScreenPos.global_translation
 	$Device/VirtualScreen.global_rotation = $Device/Horizontal/Vertical/VirtualScreenPos.global_rotation
 
+var is_prev_page_clicked:= false
+var is_next_page_clicked:= false
+
+func move_page_clicked(direction:String):
+	match(direction):
+		'Prev':
+			is_prev_page_clicked = true
+		'Next':
+			is_next_page_clicked = true
+
 
 func _on_Device_calced_pos(calced:Vector3):
 	if window:
-		window.pointer_pos(calced.x, calced.z)
+		var etc = {}
+		if is_prev_page_clicked:
+			etc.prev = is_prev_page_clicked
+		if is_next_page_clicked:
+			etc.next = is_next_page_clicked
+		window.pointer_pos(calced.x, calced.z, JSON.print(etc))
+		is_prev_page_clicked = false
+		is_next_page_clicked = false
