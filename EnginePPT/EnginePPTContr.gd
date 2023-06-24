@@ -13,6 +13,9 @@ func _ready():
 		window.set_vertical_rot = set_vertical_rot_func
 	else:
 		printerr('Cannot catch JavaScript feature')
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
+	set_virtual_screen_pos()
 
 
 func set_horizontal_rot(args):
