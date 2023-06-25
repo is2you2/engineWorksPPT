@@ -15,10 +15,11 @@ var page_list: = []
 
 
 func _ready():
+	ProjectSettings.load_resource_pack('user://engineppt/presentation_this.pck')
 	# 시작과 동시에 페이지 폴더 파일리스트를 읽어 페이지 리스트 생성
 	var dir:= Directory.new()
 	if not dir.dir_exists('res://EnginePPT/Pages'):
-		printerr('No pages found.')
+		printerr('No Page folder found.')
 		return
 	dir.open('res://EnginePPT/Pages')
 	var err:= dir.list_dir_begin(true, true)

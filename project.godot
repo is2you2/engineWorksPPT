@@ -21,8 +21,17 @@ _global_script_class_icons={
 [application]
 
 config/name="engineWorksPPT"
+config/description="엔진으로 PPT를 만듭니다
+PPT를 만들 수 있도록 설정된 기본 페이지를 이용하여 PPT처럼 흉내내보세요"
 run/main_scene="res://EnginePPT.tscn"
 config/icon="res://icon.png"
+
+[display]
+
+window/size/width=432
+window/size/height=432
+window/stretch/mode="2d"
+window/stretch/aspect="expand"
 
 [editor]
 
