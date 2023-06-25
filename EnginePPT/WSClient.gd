@@ -53,6 +53,10 @@ func _received(_try_left:= 5):
 					$VirtualPointer.virtual_mouse_pos = _center - _rcv_pos * ratio
 					get_viewport().warp_mouse($VirtualPointer.virtual_mouse_pos)
 					$VirtualPointer.update()
+					if json.has('prev'):
+						print_debug('이전')
+					if json.has('next'):
+						print_debug('다음')
 				_:
 					pass
 		else: # plain string
