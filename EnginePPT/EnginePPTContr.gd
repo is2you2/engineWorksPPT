@@ -44,15 +44,19 @@ func move_page_clicked(direction:String):
 			is_prev_page_clicked = true
 		'Next':
 			is_next_page_clicked = true
+	_on_Device_calced_pos()
 
 
-func _on_Device_calced_pos(calced:Vector3):
+func _on_Device_calced_pos(use_pos:= false):
 	if window:
 		var etc = {}
+		if use_pos: # 위치 정보 추가
+			etc.x = $Device.calced.x
+			etc.y = $Device.calced.z
 		if is_prev_page_clicked:
 			etc.prev = is_prev_page_clicked
 		if is_next_page_clicked:
 			etc.next = is_next_page_clicked
-		window.pointer_pos(calced.x, calced.z, JSON.print(etc))
+		window.pointer_pos(JSON.print(etc))
 		is_prev_page_clicked = false
 		is_next_page_clicked = false

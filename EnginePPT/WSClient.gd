@@ -37,28 +37,28 @@ func _received(_try_left:= 5):
 	if err == OK:
 		var raw_data:= client.get_peer(1).get_packet()
 		var data:= raw_data.get_string_from_utf8()
+		print_debug(data)
 		var json = JSON.parse(data).result
 		if json is Dictionary:
 			match(json):
-				{'x': var _x, 'y': var _y, ..}: # 마우스 위치 수신
-					var window_size = get_viewport().size
-					var _center = window_size / 2
-					var _rcv_pos:= Vector2(_x, -_y)
-					# 들어오는게 abs_max: 4.8 / 2.7로 들어옴
-					var ratio:= 1.0
-					if window_size.x > window_size.y:
-						ratio = window_size.x / 4.8
-					else:
-						ratio = window_size.y / 2.7
-					$VirtualPointer.virtual_mouse_pos = _center - _rcv_pos * ratio
-					get_viewport().warp_mouse($VirtualPointer.virtual_mouse_pos)
-					$VirtualPointer.update()
+				_:
+					if json.has('x'):
+						var window_size = get_viewport().size
+						var _center = window_size / 2
+						var _rcv_pos:= Vector2(json.x, -json.y)
+						# 들어오는게 abs_max: 4.8 / 2.7로 들어옴
+						var ratio:= 1.0
+						if window_size.x > window_size.y:
+							ratio = window_size.x / 4.8
+						else:
+							ratio = window_size.y / 2.7
+						$VirtualPointer.virtual_mouse_pos = _center - _rcv_pos * ratio
+						get_viewport().warp_mouse($VirtualPointer.virtual_mouse_pos)
+						$VirtualPointer.update()
 					if json.has('prev'):
 						get_parent().current_page = get_parent().current_page - 1
 					if json.has('next'):
 						get_parent().current_page = get_parent().current_page + 1
-				_:
-					pass
 		else: # plain string
 			match(data):
 				_:
