@@ -3,7 +3,7 @@ extends Node
 
 var client:= WebSocketClient.new()
 var window # iframe
-
+export var custom_mobile_address:String
 
 func _ready():
 	var target_address:String
@@ -11,7 +11,7 @@ func _ready():
 		window = JavaScript.get_interface('window')
 		target_address = window.remoteAddr
 	else: # 테스트용
-		target_address = '192.168.0.34'
+		target_address = custom_mobile_address
 	client.connect("connection_established", self, '_connected')
 	client.connect("connection_closed", self, '_disconnected')
 	client.connect("server_close_request", self, '_disconnected')
