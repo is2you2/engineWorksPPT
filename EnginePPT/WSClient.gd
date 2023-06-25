@@ -54,9 +54,9 @@ func _received(_try_left:= 5):
 					get_viewport().warp_mouse($VirtualPointer.virtual_mouse_pos)
 					$VirtualPointer.update()
 					if json.has('prev'):
-						print_debug('이전')
+						get_parent().current_page = get_parent().current_page - 1
 					if json.has('next'):
-						print_debug('다음')
+						get_parent().current_page = get_parent().current_page + 1
 				_:
 					pass
 		else: # plain string
