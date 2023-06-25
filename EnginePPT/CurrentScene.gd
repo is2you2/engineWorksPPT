@@ -2,7 +2,6 @@ extends Node
 
 
 var current_act_index:= 0
-var max_act_index:= 0
 # EnginePPT Node
 var parent:Node
 # Page Node
@@ -16,7 +15,7 @@ func _ready():
 func move_act_step_to(direction:int):
 	if current_act_index + direction < 0:
 		parent.current_page = parent.current_page - 1
-	elif current_act_index + direction > max_act_index:
+	elif current_act_index + direction > current_page.max_act_index:
 		parent.current_page = parent.current_page + 1
 	else:
 		current_act_index = current_act_index + direction
