@@ -37,7 +37,6 @@ func _received(_try_left:= 5):
 	if err == OK:
 		var raw_data:= client.get_peer(1).get_packet()
 		var data:= raw_data.get_string_from_utf8()
-		print_debug(data)
 		var json = JSON.parse(data).result
 		if json is Dictionary:
 			match(json):
@@ -56,9 +55,9 @@ func _received(_try_left:= 5):
 						get_viewport().warp_mouse($VirtualPointer.virtual_mouse_pos)
 						$VirtualPointer.update()
 					if json.has('prev'):
-						get_parent().current_page = get_parent().current_page - 1
+						get_node('../Page/Current').move_act_step_to(-1)
 					if json.has('next'):
-						get_parent().current_page = get_parent().current_page + 1
+						get_node('../Page/Current').move_act_step_to(1)
 		else: # plain string
 			match(data):
 				_:
