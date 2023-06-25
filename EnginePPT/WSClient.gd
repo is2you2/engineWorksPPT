@@ -42,7 +42,7 @@ func _received(_try_left:= 5):
 			match(json):
 				_:
 					if json.has('x'):
-						var window_size = get_viewport().size
+						var window_size = $VirtualPointer.rect_size
 						var _center = window_size / 2
 						var _rcv_pos:= Vector2(json.x, -json.y)
 						# 들어오는게 abs_max: 4.8 / 2.7로 들어옴

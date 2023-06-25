@@ -8,14 +8,6 @@ html/*
 *.bak
 result/*
 
-# FileEdit 읽은파일 무시
-addons/file-editor/lastopenedfiles.lastcfg
-
-# git_api 무시
-git_api.*
-libgitapi.*
-.github/
-
 # Mono-specific ignores
 .mono/
 data_*/
