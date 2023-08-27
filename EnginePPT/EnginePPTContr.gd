@@ -60,3 +60,9 @@ func _on_Device_calced_pos(use_pos:= false):
 		window.pointer_pos(JSON.print(etc))
 		is_prev_page_clicked = false
 		is_next_page_clicked = false
+
+
+func _on_Touches_gui_input(event):
+	if event is InputEventMouseMotion:
+		var pos_ratio:float = event.position.x / $TouchScreen/vbox/Scale/Touches.rect_size.x
+		$Device/VirtualScreen.translation.z = 2 + pos_ratio * 4

@@ -54,7 +54,7 @@ anchor_bottom = 1.0
 custom_constants/separation = 0
 
 [node name="Scale" type="MarginContainer" parent="TouchScreen/vbox"]
-margin_right = 1024.0
+margin_right = 432.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 0, 80 )
 custom_constants/margin_right = 8
@@ -64,14 +64,14 @@ custom_constants/margin_left = 8
 [node name="Touches" type="ColorRect" parent="TouchScreen/vbox/Scale"]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 1016.0
+margin_right = 424.0
 margin_bottom = 80.0
 color = Color( 0.156863, 0.156863, 0.156863, 1 )
 
 [node name="TouchPlace" type="MarginContainer" parent="TouchScreen/vbox"]
 margin_top = 80.0
-margin_right = 1024.0
-margin_bottom = 504.0
+margin_right = 432.0
+margin_bottom = 336.0
 size_flags_vertical = 3
 custom_constants/margin_right = 8
 custom_constants/margin_top = 8
@@ -81,19 +81,19 @@ custom_constants/margin_bottom = 8
 [node name="Touches" type="ColorRect" parent="TouchScreen/vbox/TouchPlace"]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 1016.0
-margin_bottom = 416.0
+margin_right = 424.0
+margin_bottom = 248.0
 color = Color( 0.376471, 0.376471, 0.376471, 1 )
 
 [node name="hbox" type="HBoxContainer" parent="TouchScreen/vbox"]
-margin_top = 504.0
-margin_right = 1024.0
-margin_bottom = 600.0
+margin_top = 336.0
+margin_right = 432.0
+margin_bottom = 432.0
 rect_min_size = Vector2( 0, 96 )
 custom_constants/separation = 0
 
 [node name="m" type="MarginContainer" parent="TouchScreen/vbox/hbox"]
-margin_right = 341.0
+margin_right = 144.0
 margin_bottom = 96.0
 size_flags_horizontal = 3
 custom_constants/margin_left = 8
@@ -101,7 +101,7 @@ custom_constants/margin_bottom = 8
 
 [node name="GoPrev" type="ColorRect" parent="TouchScreen/vbox/hbox/m"]
 margin_left = 8.0
-margin_right = 341.0
+margin_right = 144.0
 margin_bottom = 88.0
 size_flags_horizontal = 3
 color = Color( 0.215686, 0.215686, 0.215686, 1 )
@@ -111,8 +111,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="m2" type="MarginContainer" parent="TouchScreen/vbox/hbox"]
-margin_left = 341.0
-margin_right = 682.0
+margin_left = 144.0
+margin_right = 288.0
 margin_bottom = 96.0
 size_flags_horizontal = 3
 custom_constants/margin_right = 4
@@ -121,7 +121,7 @@ custom_constants/margin_bottom = 8
 
 [node name="SetCenter" type="ColorRect" parent="TouchScreen/vbox/hbox/m2"]
 margin_left = 8.0
-margin_right = 337.0
+margin_right = 140.0
 margin_bottom = 88.0
 size_flags_horizontal = 3
 color = Color( 0.215686, 0.215686, 0.215686, 1 )
@@ -131,8 +131,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="m3" type="MarginContainer" parent="TouchScreen/vbox/hbox"]
-margin_left = 682.0
-margin_right = 1024.0
+margin_left = 288.0
+margin_right = 432.0
 margin_bottom = 96.0
 size_flags_horizontal = 3
 custom_constants/margin_right = 8
@@ -141,7 +141,7 @@ custom_constants/margin_bottom = 8
 
 [node name="GoNext" type="ColorRect" parent="TouchScreen/vbox/hbox/m3"]
 margin_left = 4.0
-margin_right = 334.0
+margin_right = 136.0
 margin_bottom = 88.0
 size_flags_horizontal = 3
 color = Color( 0.215686, 0.215686, 0.215686, 1 )
@@ -151,6 +151,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [connection signal="calced_pos" from="Device" to="." method="_on_Device_calced_pos"]
+[connection signal="gui_input" from="TouchScreen/vbox/Scale/Touches" to="." method="_on_Touches_gui_input"]
 [connection signal="pressed" from="TouchScreen/vbox/hbox/m/GoPrev/PrevPage" to="." method="move_page_clicked" binds= [ "Prev" ]]
 [connection signal="pressed" from="TouchScreen/vbox/hbox/m2/SetCenter/Screen" to="." method="set_virtual_screen_pos"]
 [connection signal="pressed" from="TouchScreen/vbox/hbox/m3/GoNext/NextPage" to="." method="move_page_clicked" binds= [ "Next" ]]
