@@ -31,7 +31,11 @@ func _disconnected(_was_clean = null, _reason:= ''):
 	$VirtualPointer.is_online = false
 	$VirtualPointer.update()
 
-
+# 센터 컨트롤러 시작 무시 여부 (페이지 변경시 true)
+var ignore_contr_pos:= false
+var last_contr_pos: Vector2
+# 센터 컨트롤러의 상대 이동 거리를 기억합니다
+var relative_pos: Vector2
 func _received(_try_left:= 5):
 	var err:= client.get_peer(1).get_packet_error()
 	if err == OK:
@@ -58,6 +62,10 @@ func _received(_try_left:= 5):
 						get_node('../Page/Current').move_act_step_to(-1)
 					if json.has('next'):
 						get_node('../Page/Current').move_act_step_to(1)
+					if json.has('contr_x'):
+						ignore_contr_pos = false
+						var relative_pos = Vector2(json.contr_x, json.contr_y) - last_contr_pos
+						last_contr_pos = Vector2(json.contr_x, json.contr_y)
 		else: # plain string
 			match(data):
 				_:

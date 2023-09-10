@@ -58,7 +58,25 @@ func _on_Device_calced_pos(use_pos:= false):
 
 
 func _on_Touches_gui_input(event):
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseButton or event is InputEventMouseMotion:
 		var pos_ratio:float = event.position.x / $TouchScreen/vbox/Scale/Touches.rect_size.x
-		$Device/Horizontal/Vertical/VirtualScreenPos.translation.z = 4 + pos_ratio * 8
+		$Device/Horizontal/Vertical/VirtualScreenPos.translation.z = 4 + pos_ratio * 12
 		set_virtual_screen_pos()
+
+# 가운데 컨트롤 판넬이 눌렸는지 여부
+var Contr_is_pressed:= false
+func _on_ContrTouches_gui_input(event):
+	if event is InputEventMouseButton:
+		Contr_is_pressed = event.pressed
+		if Contr_is_pressed:
+			calc_relative_contr_pos(event.position)
+	if event is InputEventMouseMotion:
+		if Contr_is_pressed:
+			calc_relative_contr_pos(event.position)
+
+func calc_relative_contr_pos(pos:Vector2):
+	if window:
+		window.pointer_pos(JSON.print({
+			'contr_x': pos.x,
+			'contr_y': pos.y,
+		}))
