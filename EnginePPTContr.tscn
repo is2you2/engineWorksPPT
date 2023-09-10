@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://EnginePPT/EnginePPTContr.gd" type="Script" id=1]
 [ext_resource path="res://EnginePPT/Device.gd" type="Script" id=2]
+[ext_resource path="res://EnginePPT/Controller_ele/center.svg" type="Texture" id=3]
+[ext_resource path="res://EnginePPT/Controller_ele/arrow.svg" type="Texture" id=4]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 0.5, 0.5, 1 )
@@ -68,6 +70,15 @@ margin_right = 424.0
 margin_bottom = 80.0
 color = Color( 0.156863, 0.156863, 0.156863, 1 )
 
+[node name="ColorRect" type="ColorRect" parent="TouchScreen/vbox/Scale/Touches"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 33.0
+margin_top = -3.0
+margin_right = -33.0
+margin_bottom = 3.0
+
 [node name="TouchPlace" type="MarginContainer" parent="TouchScreen/vbox"]
 margin_top = 80.0
 margin_right = 432.0
@@ -106,6 +117,18 @@ margin_bottom = 88.0
 size_flags_horizontal = 3
 color = Color( 0.215686, 0.215686, 0.215686, 1 )
 
+[node name="TextureRect" type="TextureRect" parent="TouchScreen/vbox/hbox/m/GoPrev"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -66.0
+margin_top = -44.0
+margin_right = 66.0
+margin_bottom = 44.0
+texture = ExtResource( 4 )
+stretch_mode = 4
+
 [node name="PrevPage" type="ToolButton" parent="TouchScreen/vbox/hbox/m/GoPrev"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -126,6 +149,18 @@ margin_bottom = 88.0
 size_flags_horizontal = 3
 color = Color( 0.215686, 0.215686, 0.215686, 1 )
 
+[node name="TextureRect" type="TextureRect" parent="TouchScreen/vbox/hbox/m2/SetCenter"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -66.0
+margin_top = -44.0
+margin_right = 66.0
+margin_bottom = 44.0
+texture = ExtResource( 3 )
+stretch_mode = 4
+
 [node name="Screen" type="ToolButton" parent="TouchScreen/vbox/hbox/m2/SetCenter"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -145,6 +180,19 @@ margin_right = 136.0
 margin_bottom = 88.0
 size_flags_horizontal = 3
 color = Color( 0.215686, 0.215686, 0.215686, 1 )
+
+[node name="TextureRect" type="TextureRect" parent="TouchScreen/vbox/hbox/m3/GoNext"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -66.0
+margin_top = -44.0
+margin_right = 66.0
+margin_bottom = 44.0
+texture = ExtResource( 4 )
+stretch_mode = 4
+flip_h = true
 
 [node name="NextPage" type="ToolButton" parent="TouchScreen/vbox/hbox/m3/GoNext"]
 anchor_right = 1.0

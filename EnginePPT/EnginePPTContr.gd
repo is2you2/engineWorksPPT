@@ -26,11 +26,6 @@ func set_vertical_rot(args):
 	$Device/Horizontal/Vertical.rotation_degrees = Vector3(args[0], 0, 0)
 
 
-func set_virtual_screen_dist(dist:float):
-	$Device/Horizontal/Vertical/VirtualScreenPos.translation.z = dist
-	$Device/VirtualScreen.translation.z = dist
-
-
 func set_virtual_screen_pos():
 	$Device/VirtualScreen.global_translation = $Device/Horizontal/Vertical/VirtualScreenPos.global_translation
 	$Device/VirtualScreen.global_rotation = $Device/Horizontal/Vertical/VirtualScreenPos.global_rotation
@@ -65,4 +60,5 @@ func _on_Device_calced_pos(use_pos:= false):
 func _on_Touches_gui_input(event):
 	if event is InputEventMouseMotion:
 		var pos_ratio:float = event.position.x / $TouchScreen/vbox/Scale/Touches.rect_size.x
-		$Device/VirtualScreen.translation.z = 2 + pos_ratio * 4
+		$Device/Horizontal/Vertical/VirtualScreenPos.translation.z = 4 + pos_ratio * 8
+		set_virtual_screen_pos()
