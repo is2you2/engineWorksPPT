@@ -4,12 +4,14 @@ extends Node
 var client:= WebSocketClient.new()
 var window # iframe
 export var custom_mobile_address:String
+var override_cursor_position_func = JavaScript.create_callback(self, 'override_cursor_position')
 
 func _ready():
 	var target_address:String
 	if OS.has_feature('JavaScript'):
 		window = JavaScript.get_interface('window')
 		target_address = window.remoteAddr
+		window.override_cursor_position = override_cursor_position_func
 	else: # 테스트용
 		target_address = custom_mobile_address
 	client.connect("connection_established", self, '_connected')
@@ -46,18 +48,7 @@ func _received(_try_left:= 5):
 			match(json):
 				_:
 					if json.has('x'):
-						var window_size = $VirtualPointer.rect_size
-						var _center = window_size / 2
-						var _rcv_pos:= Vector2(json.x, -json.y)
-						# 들어오는게 abs_max: 4.8 / 2.7로 들어옴
-						var ratio:= 1.0
-						if window_size.x > window_size.y:
-							ratio = window_size.x / 4.8
-						else:
-							ratio = window_size.y / 2.7
-						$VirtualPointer.virtual_mouse_pos = _center - _rcv_pos * ratio
-						get_viewport().warp_mouse($VirtualPointer.virtual_mouse_pos)
-						$VirtualPointer.update()
+						override_cursor_position([json])
 					if json.has('prev'):
 						get_node('../Page/Current').move_act_step_to(-1)
 					if json.has('next'):
@@ -77,6 +68,21 @@ func _received(_try_left:= 5):
 		else:
 			printerr('RemoteContr. receive try left out')
 			client.disconnect_from_host()
+
+
+func override_cursor_position(args):
+	var window_size = $VirtualPointer.rect_size
+	var _center = window_size / 2
+	var _rcv_pos:= Vector2(args[0].x, -args[0].y)
+	# 들어오는게 abs_max: 4.8 / 2.7로 들어옴
+	var ratio:= 1.0
+	if window_size.x > window_size.y:
+		ratio = window_size.x / 4.8
+	else:
+		ratio = window_size.y / 2.7
+	$VirtualPointer.virtual_mouse_pos = _center - _rcv_pos * ratio
+	get_viewport().warp_mouse($VirtualPointer.virtual_mouse_pos)
+	$VirtualPointer.update()
 
 
 func _process(delta):
