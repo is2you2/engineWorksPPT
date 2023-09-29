@@ -3,7 +3,7 @@ extends Node
 
 # EnginePPT/Page/Current
 var parent:Node
-var max_act_index:= 1
+var max_act_index:= 0
 
 
 func _ready():
